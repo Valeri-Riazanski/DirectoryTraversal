@@ -1,7 +1,9 @@
 package com.val.riazanski;
 
 import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -10,8 +12,8 @@ public class FileBuilder {
     //fields
     //constructors
     //methods
-     public static void traverseDirectory(String pathName) throws FileNotFoundException {
-        List<String> list = new ArrayList<>();
+     public static void traverseDirectory(String pathName) throws IOException {
+         List<String> list = new ArrayList<>();
         File file = new File(pathName);
         String[] dirList = file.list();
         Pattern pattern = Pattern.compile(".txt");
@@ -43,8 +45,11 @@ public class FileBuilder {
             String sortedString = new String(tempArray);
             sortedList.add(sortedString);
         }
+        PrintWriter writer = new PrintWriter(new FileWriter("G:\\JAVA\\Dima\\sortedFile.txt",true));
         for (String line : sortedList) {
             System.out.println(line);
+            writer.println(line);
         }
+        writer.close();
     }
 }
